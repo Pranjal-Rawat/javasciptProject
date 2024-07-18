@@ -1,209 +1,89 @@
-// console.log("Hello world!")
+var state = {
+    taskList: [
+        {
+            imageUrl: "",
+            taskTitle: "",
+            tags: "",
+            taskDescription: ""
+        },
+        {
+            imageUrl: "",
+            taskTitle: "",
+            tags: "",
+            taskDescription: ""
+        },
+        {
+            imageUrl: "",
+            taskTitle: "",
+            tags: "",
+            taskDescription: ""
+        },
+        {
+            imageUrl: "",
+            taskTitle: "",
+            tags: "",
+            taskDescription: ""
+        }
+    ]
+}
 
 
-// var myPromise=new Promise(()=>{})
-
-// var myPromise=new Promise(()=>{     using arrow function(()=>) we can direclty write function
-//     resolve("Success");
-//     PromiseRejectionEvent("Error occured");
-// });
-
-// myPromise
-// .then((data)=>console.log(data))
-// .catch((err)=>{console.log(err)});
+var state = {
+    taskList: []
+};
 
 
+// DOM Operations
+
+var taskContents = document.querySelector(".task__contents");
+var taskModal = document.querySelector(".task__modal__body")
+
+console.log(taskContents)
+console.log(taskModal) 
+
+const htmlTaskContent = ({id, title, description, type, url}) => `
+    <div class="col-md-6 col-lg-4 mt-3" id=${id} key=${id}>
+        <div class="card shadow-sm task__card">
+            <div class="card-header d-flex justify-content-end task__card__header gap-2">
+                <button type="button" class="btn btn-outline-info mr-2" name=${id}>
+                    <i class="fas fa-pencil-alt" name=${id}></i>
+                </button>
+                <button type="button" class="btn btn-outline-danger mr-2 name=${id}">
+                    <i class="fas fa-trash-alt" name=${id}></i>
+                </button>
+            </div>
+            <div class="card-body">
+                ${
+                    url && `<img src=${url} alt="card image top" class="card-image-top md-3 rounded-lg" />`
+                }
+                <h4 class="card-title">${title}</h4>
+                <p class="description trim-3-lines text-muted card-text">${description}</p>
+                <div class="tags text-white d-flex flex-wrap">
+                    <span class="badge bg-primary m-1">${type}</span>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-outline-primary float-right"  data-bs-toggle="modal" data-bs-target="#showTask">
+                Open Task</button>
+            </div>
+        </div>
+    </div>
+`
 
 
-// var myPromise=new Promise((resolve, reject)=>{     //using arrow function(()=>) we can direclty write function
-//     setTimeout(()=>{
-//         resolve("success");
-//     }, 5000);
-
-//     setTimeout(()=> {
-//         reject("Error occured");  
-//     }, 2000)
-// });
-
-// myPromise
-// .then((data)=>{console.log(data)})//success
-// .catch((error)=>{console.log(error)});//failure
-
-// console.log("this is at the last" );
+const htmlModalContent = ({id, title, description, url}) => {
+    const date = new Date(parseInt(id));
+    return `
+    <div id=${id}>
+        ${
+                    url && `<img src=${url} alt="card image cap" class="image-fluid mb-3" />`
+        }
+        <strong class="text-sm text-muted">Created On ${date.toDateString()}</strong>
+        <h2 class="my-3">${title}</h2>
+        <p class="lead">${description}</p>
+    </div>
+    `
+}
 
 
-
-
-// var myPromise=new Promise((resolve, reject)=>{     //using arrow function(()=>) we can direclty write function
-//     setTimeout(()=>{
-//         resolve("success");
-//     }, 5000);
-// });
-
-// myPromise         
-
-// //.then((data)=>data+="hey")
-// //           OR
-// .then((data)=>{         
-//     data="hey"+data;
-//     return data;
-// })
-
-// .then((data)=>{
-//     console.log(data);
-// })
-
-// .catch((error)=>
-//     {console.log(error);
-// });
-
-// console.log("thid id st last -2" );
-
-
-// ______________________________________________________________________
-
-// var myPromise=new Promise((resolve, reject)=>{     //using arrow function(()=>) we can direclty write function
-//     setTimeout(()=>{
-//         resolve("success");
-//     }, 5000);
-
-//     setTimeout(()=> {
-//         reject("Error occured");  
-//     }, 2000)
-// });
-
-// myPromise         
-
-// //.then((data)=>data+="hey")
-// //           OR
-// .then((data)=>{         
-//     data="hey"+data;
-//     return data;
-// })
-
-// .then((data)=>{
-//     console.log(data);
-// })
-
-// .catch((error)=>
-//     {console.log("catch block ", error);
-// });
-
-// console.log("thid id st last -2" );
-
-// ______________________________________________________________________
-
-// ASYNC AND AWAIT IN JS
-// setTimeout(() => {
-//     console.log("1");
-// }, 2000);
-// console.log("2");
-
-
-
-
-// var myPromise = new Promise((resolve, reject) => {     //using arrow function(()=>) we can direclty write function
-//     setTimeout(() => {
-//         resolve("success");
-//     }, 2000);
-// });
-
-// var getOurPromise = async () => {
-//     var getOurPromiseResult = await myPromise;
-//     console.log(getOurPromiseResult);
-// };
-
-
-
-
-// var myPromise = new Promise((resolve, reject) => {     //using arrow function(()=>) we can direclty write function
-//     setTimeout(() => {
-//         resolve("success");
-//     }, 1000);
-//     setTimeout(() => {
-//         reject("error");
-//     }, 5000);
-// });
-
-// var getOurPromise = async () => {
-//     try {
-//         let getOurPromiseResult = await myPromise;
-//         console.log(getOurPromiseResult);
-//     }
-//     catch (error) {
-//         console.log(error);
-//     }
-// };
-
-// getOurPromise();
-
-
-// var myPromise=new Promise((resolve, reject)=>{     //using arrow function(()=>) we can direclty write function
-//   setTimeout(()=>{
-//       resolve("success");
-//   }, 7000);
-//   setTimeout(()=>{
-//     reject("error");
-// }, 5000);
-// });
-
-// var getOurPromise=async()=>{
-//   try{
-//     let getOurPromiseResult=await myPromise;
-//     console.log(getOurPromiseResult);
-//   }
-//   catch(error){
-//     // throw new Error(error);
-//     // console.log(error);
-//     console.error(error);
-//   }
-// };
-
-// getOurPromise();
-
-
-
-
-
-// var state = {
-//     taskList: [
-//         {
-//             imageUrl: "",
-//             taskTitle: "",
-//             tags: "",
-//             taskDescription: ""
-//         },
-//         {
-//             imageUrl: "",
-//             taskTitle: "",
-//             tags: "",
-//             taskDescription: ""
-//         },
-//         {
-//             imageUrl: "",
-//             taskTitle: "",
-//             tags: "",
-//             taskDescription: ""
-//         },
-//         {
-//             imageUrl: "",
-//             taskTitle: "",
-//             tags: "",
-//             taskDescription: ""
-//         }
-//     ]
-// }
-
-
-// var state = {
-//     taskList: []
-// };
-
-
-// // DOM Operations
-
-// var taskContents = document.querySelector(".task__contents");
-// var taskModal = document.querySelector(".task__modal__body")
-
-// console.log(taskContents)
-// console.log(taskModal) 
+const updateLocalStorage = () => {}
